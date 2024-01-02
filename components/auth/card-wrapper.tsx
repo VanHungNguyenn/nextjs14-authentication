@@ -1,13 +1,9 @@
 'use client'
 import React, { ReactNode } from 'react'
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
+import Header from '@/components/auth/header'
+import Social from '@/components/auth/social'
+import BackButton from './back-button'
 
 interface CardWrapperProps {
 	children: ReactNode
@@ -22,18 +18,22 @@ const CardWrapper = ({
 	headerLabel,
 	backButtonLabel,
 	backButtonHref,
-	showSocial = false,
+	showSocial,
 }: CardWrapperProps) => {
 	return (
 		<Card className='w-[400px] shadow-md'>
 			<CardHeader>
-				<CardTitle>Create project</CardTitle>
-				<CardDescription>
-					Deploy your new project in one-click.
-				</CardDescription>
+				<Header label={headerLabel} />
 			</CardHeader>
 			<CardContent>{children}</CardContent>
-			<CardFooter className='flex justify-between'></CardFooter>
+			{showSocial && (
+				<CardFooter>
+					<Social />
+				</CardFooter>
+			)}
+			<CardFooter>
+				<BackButton label={backButtonLabel} href={backButtonHref} />
+			</CardFooter>
 		</Card>
 	)
 }
