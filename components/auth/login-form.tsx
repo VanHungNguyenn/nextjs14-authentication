@@ -12,12 +12,14 @@ import { LoginSchema } from '@/schemas'
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form'
+import FormError from '@/components/form-error'
+import FormSuccess from '@/components/form-success'
+import login from '@/actions/login'
 
 const LoginForm = () => {
 	const form = useForm<z.infer<typeof LoginSchema>>({
@@ -28,8 +30,8 @@ const LoginForm = () => {
 		},
 	})
 
-	function onSubmit(values: z.infer<typeof LoginSchema>) {
-		console.log(values)
+	const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+		login(values)
 	}
 
 	return (
@@ -78,6 +80,8 @@ const LoginForm = () => {
 							</FormItem>
 						)}
 					/>
+					<FormError message='' />
+					<FormSuccess message='' />
 					<Button type='submit' className='w-full'>
 						Login
 					</Button>
