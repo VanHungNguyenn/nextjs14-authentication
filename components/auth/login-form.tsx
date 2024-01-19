@@ -40,10 +40,10 @@ const LoginForm = () => {
 
 		startTransition(() => {
 			login(values).then((data) => {
-				if (data.error) {
+				console.log(data)
+
+				if (data?.error) {
 					setError(data.error)
-				} else {
-					setSuccess(data.success)
 				}
 			})
 		})
